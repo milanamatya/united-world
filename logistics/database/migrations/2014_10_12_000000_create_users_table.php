@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('address');
+            $table->string('mobile_number');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,6 +32,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table){
+            $table->dropForeign(['address']);
+        });
         Schema::dropIfExists('users');
+
     }
 }
